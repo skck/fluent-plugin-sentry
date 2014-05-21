@@ -68,6 +68,7 @@ class Fluent::SentryOutput < Fluent::BufferedOutput
       :context => Raven::Context.new, 
       :message => record['message']
     )
+    event.culprit = record['culprit'] if record['culprit']
     event.timestamp = Time.at(time).utc.strftime('%Y-%m-%dT%H:%M:%S')
     event.logger = record['logger'] || @default_logger
     event.level = record['level'] || @default_level
